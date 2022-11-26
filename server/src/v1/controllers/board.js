@@ -23,7 +23,6 @@ exports.getAll = async (req, res) => {
     res.status(500).json(err)
   }
 }
-
 exports.updatePosition = async (req, res) => {
   const { boards } = req.body
   try {
