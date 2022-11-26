@@ -7,9 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import boardApi from "../api/boardApi";
 import EmojiPicker from "../components/common/EmojiPicker";
-import Kanban from "../components/common/Kanban";
 import { setBoards } from "../redux/features/boardSlice";
 import { setFavouriteList } from "../redux/features/favouriteSlice";
+import SprintBoard from "./../components/common/SprintBoard";
 
 let timer;
 const timeout = 500;
@@ -201,8 +201,8 @@ const Board = () => {
           />
         </Box>
         <Box>
-          {/* Kanban board */}
-          <Kanban data={sections} boardId={boardId} />
+          {/* SprintBoard board */}
+          <SprintBoard data={sections} boardId={boardId} />
         </Box>
       </Box>
     </>
