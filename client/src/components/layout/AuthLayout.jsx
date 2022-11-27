@@ -38,6 +38,7 @@ const AuthLayout = () => {
         }}
       >
         <h1>StackUnderFlow</h1>
+        <p>Keep Your Project Under Flow</p>
         <Outlet />
       </Box>
     </Container>
