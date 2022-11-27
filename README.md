@@ -1,3 +1,3 @@
 # stack-underflow
 
-It's a new project managing application close to kanbanFlow.
+Project management solution that allows real-time collaboration between users and coworkers. It uses boards to provide an overview of the existing work situation and help improve communication and overall effectiveness.
