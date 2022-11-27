@@ -1,76 +1,84 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { Box, Drawer, IconButton, List, ListItem, ListItemButton, Typography } from '@mui/material'
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
-import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import assets from '../../assets/index'
-import { useEffect, useState } from 'react'
-import boardApi from '../../api/boardApi'
-import { setBoards } from '../../redux/features/boardSlice'
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
-import FavouriteList from './FavouriteList'
+import { useSelector, useDispatch } from "react-redux";
+import {
+  Box,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  Typography,
+} from "@mui/material";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import assets from "../../assets/index";
+import { useEffect, useState } from "react";
+import boardApi from "../../api/boardApi";
+import { setBoards } from "../../redux/features/boardSlice";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import FavouriteList from "./FavouriteList";
 
 const Sidebar = () => {
-  const user = useSelector((state) => state.user.value)
-  const boards = useSelector((state) => state.board.value)
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const { boardId } = useParams()
-  const [activeIndex, setActiveIndex] = useState(0)
+  const user = useSelector((state) => state.user.value);
+  const boards = useSelector((state) => state.board.value);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { boardId } = useParams();
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const sidebarWidth = 250
+  const sidebarWidth = 250;
 
   useEffect(() => {
     const getBoards = async () => {
       try {
-        const res = await boardApi.getAll()
-        dispatch(setBoards(res))
+        const res = await boardApi.getAll();
+        dispatch(setBoards(res));
       } catch (err) {
-        alert(err)
+        console.log(err);
       }
-    }
-    getBoards()
-  }, [dispatch])
+    };
+    getBoards();
+  }, [dispatch]);
 
   useEffect(() => {
-    const activeItem = boards.findIndex(e => e.id === boardId)
+    const activeItem = boards.findIndex((e) => e.id === boardId);
     if (boards.length > 0 && boardId === undefined) {
-      navigate(`/boards/${boards[0].id}`)
+      navigate(`/boards/${boards[0].id}`);
     }
-    setActiveIndex(activeItem)
-  }, [boards, boardId, navigate])
+    setActiveIndex(activeItem);
+  }, [boards, boardId, navigate]);
 
   const logout = () => {
-    localStorage.removeItem('token')
-    navigate('/login')
-  }
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   const onDragEnd = async ({ source, destination }) => {
-    const newList = [...boards]
-    const [removed] = newList.splice(source.index, 1)
-    newList.splice(destination.index, 0, removed)
+    const newList = [...boards];
+    const [removed] = newList.splice(source.index, 1);
+    newList.splice(destination.index, 0, removed);
 
-    const activeItem = newList.findIndex(e => e.id === boardId)
-    setActiveIndex(activeItem)
-    dispatch(setBoards(newList))
+    const activeItem = newList.findIndex((e) => e.id === boardId);
+    setActiveIndex(activeItem);
+    dispatch(setBoards(newList));
 
     try {
-      await boardApi.updatePositoin({ boards: newList })
+      await boardApi.updatePositoin({ boards: newList });
     } catch (err) {
-      alert(err)
+      console.log(err);
     }
-  }
+  };
 
   const addBoard = async () => {
     try {
-      const res = await boardApi.create()
-      const newList = [res, ...boards]
-      dispatch(setBoards(newList))
-      navigate(`/boards/${res.id}`)
+      const res = await boardApi.create();
+      const newList = [res, ...boards];
+      dispatch(setBoards(newList));
+      navigate(`/boards/${res.id}`);
     } catch (err) {
-      alert(err)
+      console.log(err);
     }
-  }
+  };
 
   return (
     <Drawer
@@ -179,6 +187,6 @@ const Sidebar = () => {
       </List>
     </Drawer>
   );
-}
+};
 
-export default Sidebar
+export default Sidebar;

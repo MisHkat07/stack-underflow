@@ -37,7 +37,7 @@ const Board = () => {
         setIsFavourite(res.favourite);
         setIcon(res.icon);
       } catch (err) {
-        alert(err);
+        console.log(err);
       }
     };
     getBoard();
@@ -63,7 +63,7 @@ const Board = () => {
     try {
       await boardApi.update(boardId, { icon: newIcon });
     } catch (err) {
-      alert(err);
+      console.log(err);
     }
   };
 
@@ -92,7 +92,7 @@ const Board = () => {
       try {
         await boardApi.update(boardId, { title: newTitle });
       } catch (err) {
-        alert(err);
+        console.log(err);
       }
     }, timeout);
   };
@@ -105,7 +105,7 @@ const Board = () => {
       try {
         await boardApi.update(boardId, { description: newDescription });
       } catch (err) {
-        alert(err);
+        console.log(err);
       }
     }, timeout);
   };
@@ -122,7 +122,7 @@ const Board = () => {
       dispatch(setFavouriteList(newFavouriteList));
       setIsFavourite(!isFavourite);
     } catch (err) {
-      alert(err);
+      console.log(err);
     }
   };
 
@@ -142,7 +142,7 @@ const Board = () => {
       }
       dispatch(setBoards(newList));
     } catch (err) {
-      alert(err);
+      console.log(err);
     }
   };
 
