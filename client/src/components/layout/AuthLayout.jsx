@@ -37,7 +37,7 @@ const AuthLayout = () => {
           flexDirection: "column",
         }}
       >
-        <h1>StackUnderFlow</h1>
+        <h1>Stack-Underflow</h1>
         <p>Keep Your Project Under Flow</p>
         <Outlet />
       </Box>
