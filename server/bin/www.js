@@ -30,15 +30,18 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-mongoose.connect(process.env.DATABASE_URL).then(() => {
-  server.listen(port);
-  server.on('error', onError);
-  server.on('listening', onListening);
-  console.log(`DB is Connected!⚡`);
-}).catch(err => {
-  console.log(err);
-  process.exit(1);
-});
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    server.listen(port);
+    server.on("error", onError);
+    server.on("listening", onListening);
+    console.log(`DB is Connected!⚡`);
+  })
+  .catch((err) => {
+    console.log(err);
+    process.exit(1);
+  });
 
 
 
