@@ -1,8 +1,8 @@
 {
   "builds": [
     {
-      "src": "bin/www.js",
-      "use": "@now/node"
+      "src": "./bin/www.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
